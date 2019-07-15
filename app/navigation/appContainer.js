@@ -8,7 +8,7 @@ export default createAppContainer(createSwitchNavigator(
         App: DrawerNavigator,
     },
     {
-        initialRouteName: 'SplashScreen',
+        initialRouteName: 'App',
     }
 ));
 
