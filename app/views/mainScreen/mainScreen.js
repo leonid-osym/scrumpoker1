@@ -10,6 +10,8 @@ export default class MainScreen extends Component {
     }
 
     componentDidMount() {
+        const {tempCard} = this.props;
+        debugger
     }   
 
     render() {

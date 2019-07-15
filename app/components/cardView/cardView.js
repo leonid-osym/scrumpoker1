@@ -7,8 +7,8 @@ export default class CardView extends Component {
     }
 
     onClick =()=>{
-        const { index, onClick} = this.props;
-        onClick(index);
+        const { item, onClick} = this.props;
+        onClick(item);
     }
 
     render() {

@@ -42,21 +42,21 @@ export default DrawerComponent = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "gray"
+        backgroundColor: "#1F313D"
     },
     titleView: {
         height: '2.5%',
-        backgroundColor: 'lightgray',
+        backgroundColor: '#2B3E4D',
         justifyContent: 'center'
     },
     entryView: {
         height: '5%',
-        backgroundColor: 'lightgray',
+        backgroundColor: '#1F313D',
         justifyContent: 'center'
     },
     divider: {
         height: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#3D5056'
     },
     titleText: {
         marginStart: 5,
