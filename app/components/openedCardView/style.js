@@ -7,19 +7,15 @@ export const styles = StyleSheet.create({
         textShadowColor: 'black',
         textShadowRadius: 65
     },
-    content: {
-        flex: 1,
+    cardView: {
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 5
-    },
-    cardView: {
         borderColor: 'white',
         borderWidth: 6,
         backgroundColor: 'steelblue',
         borderRadius: 40,
         width:300,
-        height:'100%'
+        height:'80%'
     },
     cardViewDark: {
         backgroundColor: 'black',

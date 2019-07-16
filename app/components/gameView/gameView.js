@@ -19,12 +19,16 @@ class GameView extends Component {
         }
     }
 
+    onCardClick = (item)=>{
+        const { onGameCardClick }=this.props;
+        onGameCardClick(item);
+    }
+
     render() {
-        const {startAnimation}=this.props;
         console.log(this.props);
         return (
             <View style={styles.mainView} >
-                {this.cards.map((item, index) => <CardView key={index} item={item} onClick={startAnimation} />)}
+                {this.cards.map((item, index) => <CardView key={index} item={item} onClick={this.onCardClick} />)}
             </View>
         );
     }

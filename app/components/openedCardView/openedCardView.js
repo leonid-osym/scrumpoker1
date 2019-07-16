@@ -1,44 +1,39 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Easing, Animated } from 'react-native';
-import {rotateCard, rotateGameView} from '../../redux/actions/cardsActions';
+import { rotateCard, rotateGameView } from '../../redux/actions/cardsActions';
 import { connect } from 'react-redux';
 import { styles } from './style';
 
 class OpenedCardView extends Component {
     constructor(props) {
         super(props);
-        this.rotateValueHolder = new Animated.Value(0);
     }
 
-    onClick =()=>{
-        this.startRotateFunction();
-        console.log(this.props);
-    }
-    componentDidMount() {
+    onClick = () => {
+        const { onMainCardClick, item } = this.props;
+        onMainCardClick(item);
     }
 
     render() {
-        //console.log(this.props);
-        const {gameRotated, cardRotated, title} = this.props;
-        
+
+        const { item, side } = this.props;
+        console.log('side', side);
         return (
-            <View style={styles.cardView}>
-                <TouchableOpacity onPress = {this.onClick} style={styles.content}>
-                    <Text style={styles.textStyle}>
-                    { title }
-                    </Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={this.onClick} style={styles.cardView}>
+                <Text style={styles.textStyle}>
+                    {item}
+                </Text>
+            </TouchableOpacity>
         )
     }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
     return {
-      gameRotated: state.rotate.gameRotated,
-      cardRotated: state.rotate.cardRotated,
-      title: state.rotate.title
+        gameRotated: state.rotate.gameRotated,
+        cardRotated: state.rotate.cardRotated,
+        title: state.rotate.title
     }
-  };
+};
 
 export default connect(mapStateToProps, { rotateCard, rotateGameView })(OpenedCardView);
