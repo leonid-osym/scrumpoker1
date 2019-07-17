@@ -5,6 +5,8 @@ import { styles } from './style';
 export default class CardView extends PureComponent {
     constructor(props) {
         super(props);
+        this.style = null;
+        this.cardItem = null;
     }
 
     onClick = () => {
@@ -12,11 +14,22 @@ export default class CardView extends PureComponent {
         onClick(item);
     }
 
-    render() {
+    processIfGetColor = () => {
         const { item } = this.props;
+        if (item[0] === '#') {
+            this.cardItem = '';
+            this.style = { ...styles.cardView, backgroundColor: item };
+        } else {
+            this.cardItem = item;
+            this.style = { ...styles.cardView };
+        }
+    }
+
+    render() {
+        this.processIfGetColor();
         return (
-            <TouchableOpacity onPress={this.onClick} style={styles.cardView}>
-                <Text style={styles.textStyle}>{item}</Text>
+            <TouchableOpacity onPress={this.onClick} style={this.style}>
+                <Text style={styles.textStyle}>{this.cardItem}</Text>
             </TouchableOpacity>
         )
     }

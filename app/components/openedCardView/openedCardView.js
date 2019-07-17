@@ -12,16 +12,31 @@ class OpenedCardView extends Component {
     onClick = () => {
         const { onMainCardClick, item } = this.props;
         onMainCardClick(item);
+        //console.log(item);
+    }
+
+    processIfGetColor= ()=>{
+        const { item } = this.props;
+        if(item[0] === '#'){
+            this.cardItem = '';
+            this.style = {...styles.cardView, backgroundColor: item};
+        } else if(item === '☕️'){
+            this.cardItem = item;
+            this.style = {...styles.cardView};
+            //this.source = '../../img/coffeecup.png';
+        } else {
+            this.cardItem = item;
+            this.style = {...styles.cardView};
+        }
     }
 
     render() {
-
-        const { item, side } = this.props;
-        console.log('side', side);
+        this.processIfGetColor();
         return (
-            <TouchableOpacity onPress={this.onClick} style={styles.cardView}>
+            <TouchableOpacity onPress={this.onClick} style={this.style}>
+                {/* <Image source={require(this.source)} /> */}
                 <Text style={styles.textStyle}>
-                    {item}
+                    {this.cardItem}
                 </Text>
             </TouchableOpacity>
         )
