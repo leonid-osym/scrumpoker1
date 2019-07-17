@@ -81,13 +81,13 @@ export default class MainScreen extends Component {
         });
         return (
             <SafeAreaView style={styles.container}>
-                <Animated.View style={{ position: 'absolute', width: '100%', height: '100%', transform: [{ rotateY: rotateGame }] }}>
+                <Animated.View style={{ ...styles.gameViewAnimated, transform: [{ rotateY: rotateGame }] }}>
                     <GameView onGameCardClick={this.onGameCardClick} />
                 </Animated.View>
-                <Animated.View style={{ position: 'absolute', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', transform: [{ rotateY: rotateCard }] }}>
+                <Animated.View style={{ ...styles.cardViewAnimated, transform: [{ rotateY: rotateCard }] }}>
                     <OpenedCardView item={item} onMainCardClick={this.onGameCardClick} />
                 </Animated.View>
-                {isHideCard ? <TouchableOpacity style={{ position: 'absolute', width: '100%', height: '100%' }} onPress={this.showCard} /> : null}
+                {isHideCard ? <TouchableOpacity style={styles.darkCard} onPress={this.showCard} /> : null}
             </SafeAreaView>
         );
     }

@@ -11,10 +11,12 @@ export default DrawerNavigator = createDrawerNavigator(
     },
     {
         // Custom rendering component of drawer panel
-        contentComponent: () => {
-            return (
-                <DrawerComponent/>
-            )
-        },
+        contentComponent: DrawerComponent,
+        // () => {
+        //     console.log('drawer', this.props);
+        //     return (
+        //         <DrawerComponent />
+        //     )
+        // },
     }
 );

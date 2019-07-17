@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Easing, Animated } from 'react-native';
-import { rotateCard, rotateGameView } from '../../redux/actions/cardsActions';
-import { connect } from 'react-redux';
+import { Text, TouchableOpacity } from 'react-native';
 import { styles } from './style';
 
-class OpenedCardView extends Component {
+export default class OpenedCardView extends Component {
     constructor(props) {
         super(props);
     }
@@ -42,13 +40,3 @@ class OpenedCardView extends Component {
         )
     }
 }
-
-const mapStateToProps = state => {
-    return {
-        gameRotated: state.rotate.gameRotated,
-        cardRotated: state.rotate.cardRotated,
-        title: state.rotate.title
-    }
-};
-
-export default connect(mapStateToProps, { rotateCard, rotateGameView })(OpenedCardView);

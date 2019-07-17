@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import CardView from '../../components/cardView/cardView';
-import { rotateCard, rotateGameView, setTitle } from '../../redux/actions/cardsActions';
 import { connect } from 'react-redux';
 import { styles } from './style';
 
@@ -17,7 +16,7 @@ class GameView extends Component {
     }
 
     fillCards = () =>{
-        switch(this.state.mode){
+        switch(this.props.gameMode){
             case 'fibo': this.cards = this.generateFibo(15); break;
             case 'tshirt': this.cards = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '∞', '?', '☕️']; break;
             case 'standard': this.cards = ['0', '1/2', '1', '2', '3', '5', '8', '13', '20', '40', '100', '∞', '?', '☕️']; break;
@@ -48,6 +47,7 @@ class GameView extends Component {
     }
 
     render() {
+        this.fillCards();
         console.log(this.props);
         return (
             <View style={styles.mainView} >
@@ -59,10 +59,8 @@ class GameView extends Component {
 
 const mapStateToProps = state => {
     return {
-        gameRotated: state.rotate.gameRotated,
-        cardRotated: state.rotate.cardRotated,
-        title: state.rotate.title,
+        gameMode: state.rotate.gameMode,
     }
 };
 
-export default connect(mapStateToProps, { rotateCard, rotateGameView, setTitle })(GameView);
+export default connect(mapStateToProps)(GameView);
