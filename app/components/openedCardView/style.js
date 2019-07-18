@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     textStyle: {
-        fontSize: 100,
+        fontSize: 120,
         color: 'white',
         textShadowColor: 'black',
         textShadowRadius: 65

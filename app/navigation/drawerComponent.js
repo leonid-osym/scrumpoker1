@@ -46,7 +46,7 @@ class DrawerComponent extends Component {
                 <View style={styles.divider} />
                 <DrawerTitle text='App' />
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_settings_white_24dp.png')} text='Settings' />
+                <DrawerEntry imgSource={require('../img/baseline_settings_white_24dp.png')} text='Settings' onPress={() => this.props.navigation.navigate('Settings')}/>
                 <View style={styles.divider} />
                 <DrawerEntry imgSource={require('../img/baseline_share_white_24dp.png')} text='Rate this app!' />
                 <View style={styles.divider} />
