@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { SafeAreaView, Animated, Easing, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import GameView from '../../components/gameView/gameView';
 import OpenedCardView from '../../components/openedCardView/openedCardView';
 import { styles } from './style';
 
-export default class MainScreen extends Component {
+class MainScreen extends Component {
 
     static navigationOptions = {
         header: null
@@ -18,6 +19,7 @@ export default class MainScreen extends Component {
             mainCardShown: false,
             changeCardBackground: false,
             isHideCard: false,
+            cardIsBusy: false
         }
         this.cards = [];
         this.rotateGame = new Animated.Value(0);
@@ -25,10 +27,10 @@ export default class MainScreen extends Component {
     }
 
     onGameCardClick = (item) => {
-        const { mode } = this.props;
-        const { isShowAllCards } = this.state;
+        const { cardRevealMode } = this.props;
+        const { isShowAllCards, cardIsBusy } = this.state;
         this.setState({ item: item });
-        if (mode === 'hide') {
+        if (cardRevealMode) {
             isShowAllCards ? this.animationOpenCardModeGide() : this.animationCloseCardModeGide();
         } else {
             isShowAllCards ? this.animationOpenCard() : this.animationCloseCard();
@@ -96,4 +98,12 @@ export default class MainScreen extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        cardRevealMode: state.rotate.cardRevealMode,
+    }
+};
+
+export default connect(mapStateToProps)(MainScreen);
 

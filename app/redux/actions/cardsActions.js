@@ -4,3 +4,10 @@ export const setGameMode = (gameMode) => {
         payload: gameMode
     }
 }
+
+export const setCardRevealMode = (cardRevealMode) => {
+    return {
+        type: 'SET_CARD_REVEAL_MODE',
+        payload: cardRevealMode
+    }
+}
