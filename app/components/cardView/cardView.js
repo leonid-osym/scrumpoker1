@@ -27,8 +27,9 @@ export default class CardView extends PureComponent {
 
     render() {
         this.processIfGetColor();
+        const { disabled } = this.props;
         return (
-            <TouchableOpacity onPress={this.onClick} style={this.style}>
+            <TouchableOpacity onPress={this.onClick} style={this.style} disabled={disabled}>
                 <Text style={styles.textStyle}>{this.cardItem}</Text>
             </TouchableOpacity>
         )

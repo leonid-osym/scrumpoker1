@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
     title: '',
     gameMode: 'standard',
-    cardRevealMode: false
+    cardRevealMode: false,
+    drawerIndicator: true
 };
 export default (state = INITIAL_STATE, action) => {
     //console.log('action', action);
@@ -16,6 +17,12 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 cardRevealMode: action.payload
+            }
+        }
+        case 'ALLOW_DRAWER_INDICATOR': {
+            return {
+                ...state,
+                drawerIndicator: action.payload
             }
         }
         default: return state;

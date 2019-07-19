@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Share } from 'react-native';
 import DrawerEntry from './entryComponent/drawerEntry';
 import DrawerTitle from './titleComponent/drawerTitle';
 import { styles } from './styles';
@@ -29,6 +29,21 @@ class DrawerComponent extends Component {
         this.props.navigation.closeDrawer();
     }
 
+    shareWithOthers = ()=>{
+        Share.share({
+            message: "Windows? Mac? I don't give a f*ck!",
+            url: 'http://someurl.here',
+            title: 'You know what?'
+          }, {
+            // Android only:
+            dialogTitle: 'Share Scrum Poker',
+            // iOS only:
+            excludedActivityTypes: [
+              'com.apple.UIKit.activity.PostToTwitter'
+            ]
+          })
+    }
+
     render() {
         console.log('state', this.state);
         console.log('props', this.props);
@@ -48,7 +63,7 @@ class DrawerComponent extends Component {
                 <View style={styles.divider} />
                 <DrawerEntry imgSource={require('../img/baseline_settings_white_24dp.png')} text='Settings' onPress={() => this.props.navigation.navigate('Settings')}/>
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_share_white_24dp.png')} text='Rate this app!' />
+                <DrawerEntry imgSource={require('../img/baseline_share_white_24dp.png')} text='Tell the world!' onPress={this.shareWithOthers}/>
                 <View style={styles.divider} />
                 <DrawerEntry imgSource={require('../img/baseline_info_white_24dp.png')} text='About' />
                 <View style={styles.divider} />

@@ -11,3 +11,10 @@ export const setCardRevealMode = (cardRevealMode) => {
         payload: cardRevealMode
     }
 }
+
+export const setDrawerIndicator = (allowIndicator) => {
+    return {
+        type: 'ALLOW_DRAWER_INDICATOR',
+        payload: allowIndicator
+    }
+}

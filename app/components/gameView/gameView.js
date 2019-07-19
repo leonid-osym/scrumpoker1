@@ -9,9 +9,6 @@ class GameView extends Component {
     constructor(props) {
         super(props);
         this.cards = [];
-        this.state={
-            mode: 'risk'
-        }
         this.fillCards();
     }
 
@@ -48,10 +45,11 @@ class GameView extends Component {
 
     render() {
         this.fillCards();
-        console.log(this.props);
+        //console.log(this.props);
+        const { disabled } = this.props;
         return (
             <View style={styles.mainView} >
-                {this.cards.map((item, index) => <CardView key={index} item={item} onClick={this.onCardClick} />)}
+                {this.cards.map((item, index) => <CardView key={index} item={item} onClick={this.onCardClick} disabled={disabled}/>)}
             </View>
         );
     }
