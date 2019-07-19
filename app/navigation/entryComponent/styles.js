@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     entryView: {
-        height: '5%',
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -15,5 +14,11 @@ export const styles = StyleSheet.create({
     },
     icon: {
         marginStart: 10
+    },
+    touchOpacity: {
+        flexDirection: 'row', 
+        justifyContent: 'flex-start', 
+        alignItems: 'center',
+        height: '5%',
     }
 });

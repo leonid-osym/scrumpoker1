@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import CardRotateReducer from './cardsRotateReducer';
+import SettingsReducer from './settingsReducer';
 
 export default combineReducers({
-    rotate: CardRotateReducer
+    settings: SettingsReducer
 });

@@ -134,8 +134,8 @@ class MainScreen extends Component {
 
 const mapStateToProps = state => {
     return {
-        cardRevealMode: state.rotate.cardRevealMode,
-        drawerIndicator: state.rotate.drawerIndicator,
+        cardRevealMode: state.settings.cardRevealMode,
+        drawerIndicator: state.settings.drawerIndicator,
     }
 };
 

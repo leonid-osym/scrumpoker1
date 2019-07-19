@@ -3,7 +3,7 @@ import { View, Share } from 'react-native';
 import DrawerEntry from './entryComponent/drawerEntry';
 import DrawerTitle from './titleComponent/drawerTitle';
 import { styles } from './styles';
-import { setGameMode } from '../redux/actions/cardsActions';
+import { setGameMode } from '../redux/actions/actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -45,8 +45,6 @@ class DrawerComponent extends Component {
     }
 
     render() {
-        console.log('state', this.state);
-        console.log('props', this.props);
         return (
             <View style={styles.container}>
                 <DrawerTitle text='Deck' />
@@ -65,7 +63,7 @@ class DrawerComponent extends Component {
                 <View style={styles.divider} />
                 <DrawerEntry imgSource={require('../img/baseline_share_white_24dp.png')} text='Tell the world!' onPress={this.shareWithOthers}/>
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_info_white_24dp.png')} text='About' />
+                <DrawerEntry imgSource={require('../img/baseline_info_white_24dp.png')} text='About' onPress={() => this.props.navigation.navigate('About')}/>
                 <View style={styles.divider} />
             </View >)
     }
@@ -77,7 +75,7 @@ DrawerComponent.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        gameMode: state.rotate.gameMode,
+        gameMode: state.settings.gameMode,
     }
 };
 

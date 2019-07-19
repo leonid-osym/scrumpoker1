@@ -5,7 +5,6 @@ const INITIAL_STATE = {
     drawerIndicator: true
 };
 export default (state = INITIAL_STATE, action) => {
-    //console.log('action', action);
     switch (action.type) {
         case 'SET_GAME_MODE': {
             return {

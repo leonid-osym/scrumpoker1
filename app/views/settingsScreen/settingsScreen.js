@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { setCardRevealMode, setDrawerIndicator } from '../../redux/actions/cardsActions';
+import { setCardRevealMode, setDrawerIndicator } from '../../redux/actions/actions';
 import { connect } from 'react-redux';
 import MenuItemComponent from './menuItemComponent/menuItemComponent';
 
@@ -19,9 +19,6 @@ class SettingsScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            switchButtonValue: true
-        }
     }
 
     setCardRevealValue = (value) => {
@@ -30,10 +27,6 @@ class SettingsScreen extends Component {
 
     setDrawerIndicator = (value) => {
         this.props.setDrawerIndicator(value);
-    }
-
-    setValue = (value) => {
-        console.log('new PROPS value: ', this.props);
     }
 
     render() {
@@ -49,8 +42,8 @@ class SettingsScreen extends Component {
 
 const mapStateToProps = state => {
     return {
-        cardRevealMode: state.rotate.cardRevealMode,
-        drawerIndicator: state.rotate.drawerIndicator
+        cardRevealMode: state.settings.cardRevealMode,
+        drawerIndicator: state.settings.drawerIndicator
     }
 };
 

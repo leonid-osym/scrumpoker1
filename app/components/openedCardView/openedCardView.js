@@ -10,7 +10,6 @@ export default class OpenedCardView extends Component {
     onClick = () => {
         const { onMainCardClick, item } = this.props;
         onMainCardClick(item);
-        //console.log(item);
     }
 
     processIfGetColor = () => {

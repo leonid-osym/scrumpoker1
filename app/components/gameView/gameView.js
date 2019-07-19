@@ -45,7 +45,6 @@ class GameView extends Component {
 
     render() {
         this.fillCards();
-        //console.log(this.props);
         const { disabled } = this.props;
         return (
             <View style={styles.mainView} >
@@ -57,7 +56,7 @@ class GameView extends Component {
 
 const mapStateToProps = state => {
     return {
-        gameMode: state.rotate.gameMode,
+        gameMode: state.settings.gameMode,
     }
 };
 
