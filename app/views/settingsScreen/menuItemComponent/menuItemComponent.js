@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, Text, View, Switch } from 'react-native';
+import { TouchableOpacity, Text, View, Switch, Platform } from 'react-native';
 
 export default class MenuItemComponent extends PureComponent {
     constructor(props) {
@@ -40,7 +40,7 @@ export default class MenuItemComponent extends PureComponent {
                         onValueChange={this.changeButtonState}
                         trackColor={{ true: '#132F3A', false: '#B6B6B6' }}
                         ios_backgroundColor="#fbfbfb"
-                        thumbColor={switchButtonValue ? "#2D79AD" : "#fff"}
+                        thumbColor={switchButtonValue ? "#2D79AD" : Platform.OS === 'android' ? "#fff": "#959595"}
                         value={switchButtonValue}
                     />
                 </View>

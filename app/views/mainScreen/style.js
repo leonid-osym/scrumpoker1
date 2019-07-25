@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
         backgroundColor: 'black',
     },
     gameViewAnimated: {
+        marginTop: Platform.OS==='ios' ? 40 : 0,
         position: 'absolute', 
         width: '100%', 
         height: '100%',
