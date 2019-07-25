@@ -20,7 +20,7 @@ export default class OpenedCardView extends Component {
         } else if (item === '☕️') {
             this.cardItem = item;
             this.style = { ...styles.cardView };
-            //this.source = '../../img/coffeecup.png';
+            // this.source = require('../../img/coffeecup.png');
         } else {
             this.cardItem = item;
             this.style = { ...styles.cardView };
@@ -32,7 +32,7 @@ export default class OpenedCardView extends Component {
         const { disabled } = this.props;
         return (
             <TouchableOpacity onPress={this.onClick} style={this.style} disabled={disabled} activeOpacity={1}>
-                {/* <Image source={require(this.source)} /> */}
+                {/* <Image source={this.source} /> */}
                 <Text style={styles.textStyle}>
                     {this.cardItem}
                 </Text>

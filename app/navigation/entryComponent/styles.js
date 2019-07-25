@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
     entryText: {
         marginStart: 10,
-        fontSize: 16,
+        fontSize: 20,
         color: 'white'
     },
     icon: {
@@ -19,6 +19,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         justifyContent: 'flex-start', 
         alignItems: 'center',
-        height: '5%',
+        height: '7%',
     }
 });
