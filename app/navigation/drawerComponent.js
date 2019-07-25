@@ -5,6 +5,7 @@ import DrawerTitle from './titleComponent/drawerTitle';
 import { styles } from './styles';
 import { setGameMode } from '../redux/actions/actions';
 import { connect } from 'react-redux';
+import { images } from './../img';
 import PropTypes from 'prop-types';
 
 class DrawerComponent extends Component {
@@ -49,21 +50,21 @@ class DrawerComponent extends Component {
             <View style={styles.container}>
                 <DrawerTitle text='Deck' />
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_layers_white_24dp.png')} text='Standard' onPress={this.setStandard} />
+                <DrawerEntry imgSource={images['layers']} text='Standard' onPress={this.setStandard} />
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_layers_white_24dp.png')} text='T-Shirt' onPress={this.setTShirt} />
+                <DrawerEntry imgSource={images['layers']} text='T-Shirt' onPress={this.setTShirt} />
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_layers_white_24dp.png')} text='Fibonacci' onPress={this.setFibo} />
+                <DrawerEntry imgSource={images['layers']} text='Fibonacci' onPress={this.setFibo} />
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_layers_white_24dp.png')} text='Risk Planning' onPress={this.setRisk} />
+                <DrawerEntry imgSource={images['layers']} text='Risk Planning' onPress={this.setRisk} />
                 <View style={styles.divider} />
                 <DrawerTitle text='App' />
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_settings_white_24dp.png')} text='Settings' onPress={() => this.props.navigation.navigate('Settings')}/>
+                <DrawerEntry imgSource={images['settings']} text='Settings' onPress={() => this.props.navigation.navigate('Settings')}/>
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_share_white_24dp.png')} text='Tell the world!' onPress={this.shareWithOthers}/>
+                <DrawerEntry imgSource={images['share']} text='Tell the world!' onPress={this.shareWithOthers}/>
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={require('../img/baseline_info_white_24dp.png')} text='About' onPress={() => this.props.navigation.navigate('About')}/>
+                <DrawerEntry imgSource={images['info']} text='About' onPress={() => this.props.navigation.navigate('About')}/>
                 <View style={styles.divider} />
             </View >)
     }

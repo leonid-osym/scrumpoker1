@@ -17,10 +17,11 @@ export default class OpenedCardView extends Component {
         if (item[0] === '#') {
             this.cardItem = '';
             this.style = { ...styles.cardView, backgroundColor: item };
-        } else if (item === '☕️') {
-            this.cardItem = item;
-            this.style = { ...styles.cardView };
-            // this.source = require('../../img/coffeecup.png');
+            // } else if (item === '☕️') {
+            //     this.cardItem = item;
+            //     this.style = { ...styles.cardView };
+            //     // this.source = require('../../img/coffeecup.png');
+            // } 
         } else {
             this.cardItem = item;
             this.style = { ...styles.cardView };
