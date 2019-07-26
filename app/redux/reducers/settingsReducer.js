@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
     title: '',
-    gameMode: 'standard',
-    cardRevealMode: false,
+    gameMode: 'fibo',
+    cardRevealMode: true,
     drawerIndicator: true
 };
 export default (state = INITIAL_STATE, action) => {

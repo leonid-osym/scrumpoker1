@@ -48,13 +48,14 @@ class DrawerComponent extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.divider} />
                 <DrawerTitle text='Deck' />
+                <View style={styles.divider} />
+                <DrawerEntry imgSource={images['layers']} text='Fibonacci' onPress={this.setFibo} />
                 <View style={styles.divider} />
                 <DrawerEntry imgSource={images['layers']} text='Standard' onPress={this.setStandard} />
                 <View style={styles.divider} />
                 <DrawerEntry imgSource={images['layers']} text='T-Shirt' onPress={this.setTShirt} />
-                <View style={styles.divider} />
-                <DrawerEntry imgSource={images['layers']} text='Fibonacci' onPress={this.setFibo} />
                 <View style={styles.divider} />
                 <DrawerEntry imgSource={images['layers']} text='Risk Planning' onPress={this.setRisk} />
                 <View style={styles.divider} />

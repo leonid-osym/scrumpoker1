@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     textStyle: {
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
         fontSize: 120,
         color: 'white',
         textShadowColor: 'black',
@@ -10,9 +12,9 @@ export const styles = StyleSheet.create({
     cardView: {
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'white',
-        borderWidth: 6,
-        backgroundColor: 'steelblue',
+        //borderColor: 'white',
+        //borderWidth: 6,
+        backgroundColor: '#00799f',
         borderRadius: 40,
         width:300,
         height:'80%'

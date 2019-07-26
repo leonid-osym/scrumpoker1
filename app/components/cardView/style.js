@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     textStyle: {
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
         fontSize: 40,
         color: 'white',
         textShadowColor: 'black',
@@ -13,9 +15,9 @@ export const styles = StyleSheet.create({
         marginVertical: 10,
         marginLeft: 20,
         marginRight: 20,
-        borderColor: 'white',
-        borderWidth: 3,
-        backgroundColor: 'steelblue',
+        //borderColor: 'white',
+        //borderWidth: 3,
+        backgroundColor: '#00799f',
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',

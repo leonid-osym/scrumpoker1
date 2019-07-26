@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     },
     circleButton: {
         position: 'absolute',
-        backgroundColor: '#1F313D',
+        backgroundColor: '#0E1C25',
         width: 60,
         height: 60,
         borderRadius: 30,

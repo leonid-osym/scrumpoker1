@@ -5,9 +5,11 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#1F313D',
+        //backgroundColor: '#1F313D',
     },
     entryText: {
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
         marginStart: 10,
         fontSize: 20,
         color: 'white'

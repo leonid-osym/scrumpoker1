@@ -34,7 +34,7 @@ export default class MenuItemComponent extends PureComponent {
         return (
             <TouchableOpacity onPress={this.onPress}>
                 <View style={{ margin: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'stretch' }}>
-                    <Text style={{ margin: 5, marginLeft: '20%', color: '#fff', fontSize: 18 }}>{text}</Text>
+                    <Text style={{ margin: 5, marginLeft: '20%', color: '#fff', fontSize: 18, fontFamily: 'Roboto', fontStyle: 'normal', }}>{text}</Text>
                     <Switch
                         style={{ marginRight: '4%' }}
                         onValueChange={this.changeButtonState}
