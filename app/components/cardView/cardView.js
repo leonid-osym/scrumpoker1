@@ -12,13 +12,8 @@ export default class CardView extends PureComponent {
         this.style = null;
         this.cardItem = null;
         this.image = false;
-        this.processIfGetColor();
-        this.setImage();
-    }
-
-    componentDidMount(){
-        this.processIfGetColor();
-        this.setImage();
+        // this.processIfGetColor();
+        // this.setImage();
     }
 
     onClick = () => {
@@ -50,8 +45,8 @@ export default class CardView extends PureComponent {
     }
 
     render() {
-        // this.processIfGetColor();
-        // this.setImage();
+        this.processIfGetColor();
+        this.setImage();
         const { disabled } = this.props;
         return (
             <TouchableOpacity onPress={this.onClick} style={this.style} disabled={disabled}>

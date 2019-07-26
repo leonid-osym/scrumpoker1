@@ -44,6 +44,7 @@ class GameView extends Component {
     }
 
     render() {
+        this.fillCards();
         const { disabled } = this.props;
         return (
             <View style={styles.mainView} >
