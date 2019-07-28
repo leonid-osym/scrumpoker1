@@ -17,7 +17,7 @@ class GameView extends Component {
             case 'fibo': this.cards = this.generateFibo(15); break;
             case 'tshirt': this.cards = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '∞', '?', '☕️']; break;
             case 'standard': this.cards = ['0', '1/2', '1', '2', '3', '5', '8', '13', '20', '40', '100', '∞', '?', '☕️']; break;
-            case 'risk': this.cards = ['#88C247', '#FFEC38', '#FC9900', '#9928AE', '#F34433', '∞', '?', '☕️']; break;
+            case 'risk': this.cards = ['#4bc247', '#FFEC38', '#FC9900', '#9928AE', '#F34433', '∞', '?', '☕️']; break;
         }
     }
 

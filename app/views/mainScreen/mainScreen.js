@@ -65,14 +65,6 @@ class MainScreen extends Component {
         this.setState({ isShowAllCards: true })
     }
 
-    // animationOpenCardModeReveal = () => {
-    //     this.rotateGame.setValue(0);
-    //     this.rotateCard.setValue(0);
-    //     Animated.timing(this.rotateGame, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(this.animationCallback);
-    //     this.setState({ isShowAllCards: false, isHideCard: true })
-    // }
-
-
     animationOpenCardModeReveal = () => {
         this.rotateGame.setValue(0);
         this.rotateCard.setValue(0);

@@ -19,13 +19,10 @@ export default class OpenedCardView extends Component {
         const { onMainCardClick, item, revealMode, disabled } = this.props;
         this.cardShown = false;
         onMainCardClick(item);
-        //this.cardShown = false;
         if (revealMode) {
-            //this.image = <LogoWizards2 width={250} height={250} />;
             this.clicks += 1;
             if (this.clicks == 2) {
                 this.cardShown = this.props.revealMode;
-                //this.image = null;
                 this.clicks = 0
             }
         }
@@ -38,10 +35,7 @@ export default class OpenedCardView extends Component {
             if (this.clicks != 0) {
                 this.cardItem = '';
                 this.style = { ...styles.cardView, backgroundColor: item };
-            } else {
-                this.image = <LogoWizards2 width={250} height={250} />;
-                this.style = { ...styles.cardView };
-            }
+            } 
         } else {
             this.cardItem = item;
             this.style = { ...styles.cardView };
