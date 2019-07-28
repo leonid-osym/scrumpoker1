@@ -16,10 +16,10 @@ export default class OpenedCardView extends Component {
     }
 
     onClick = () => {
-        const { onMainCardClick, item, revealMode } = this.props;
+        const { onMainCardClick, item, revealMode, disabled } = this.props;
         this.cardShown = false;
         onMainCardClick(item);
-        this.cardShown = false;
+        //this.cardShown = false;
         if (revealMode) {
             //this.image = <LogoWizards2 width={250} height={250} />;
             this.clicks += 1;
@@ -34,20 +34,23 @@ export default class OpenedCardView extends Component {
     processIfGetColor = () => {
         const { item, disabled } = this.props;
         this.cardItem = '';
-        //if(!disabled){
-            if (item[0] === '#') {
+        if (item[0] === '#') {
+            if (this.clicks != 0) {
                 this.cardItem = '';
                 this.style = { ...styles.cardView, backgroundColor: item };
             } else {
-                this.cardItem = item;
+                this.image = <LogoWizards2 width={250} height={250} />;
                 this.style = { ...styles.cardView };
             }
-        //}
+        } else {
+            this.cardItem = item;
+            this.style = { ...styles.cardView };
+        }
     }
 
     setImage = () => {
         const { revealMode, disabled } = this.props;
-        if(!revealMode){
+        if (!revealMode) {
             this.image = null;
         }
         if (revealMode && this.cardShown && !disabled) {
@@ -71,8 +74,7 @@ export default class OpenedCardView extends Component {
         const { disabled, revealMode } = this.props;
         return (
             <TouchableOpacity onPress={this.onClick} style={this.style} disabled={disabled} activeOpacity={1}>
-                {this.image ? this.image : <Text style={styles.textStyle }>{this.cardItem}</Text>}
-                {/* {this.image ? this.image : <Text style={!revealMode ? { ...styles.textStyle } : { ...styles.textStyle, transform: [{ rotateY: '180deg' }] }}>{this.cardItem}</Text>} */}
+                {this.image ? this.image : <Text style={styles.textStyle}>{this.cardItem}</Text>}
             </TouchableOpacity>
         )
     }

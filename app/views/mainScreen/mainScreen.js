@@ -87,7 +87,7 @@ class MainScreen extends Component {
         const { cardAppeared } = this.state;
         if (cardAppeared === false) {
             Animated.sequence([
-                Animated.timing(this.rotateCard, { toValue: 4, duration: 500, easing: Easing.linear, useNativeDriver: true }),
+                Animated.timing(this.rotateCard, { toValue: 5, duration: 500, easing: Easing.linear, useNativeDriver: true }),
                 Animated.timing(this.rotateGame, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true })
             ]).start(this.animationCallback);
             this.setState({ isShowAllCards: true })
@@ -96,8 +96,8 @@ class MainScreen extends Component {
 
     animationOpenCardAppeared = () => {
         Animated.sequence([
-            Animated.timing(this.rotateCard, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true }),
-            Animated.timing(this.rotateCard, { toValue: 3, duration: 500, easing: Easing.linear, useNativeDriver: true })
+            Animated.timing(this.rotateCard, { toValue: 3, duration: 0, easing: Easing.linear, useNativeDriver: true }),
+            Animated.timing(this.rotateCard, { toValue: 4, duration: 500, easing: Easing.linear, useNativeDriver: true })
         ]).start(this.animationCallback);
         //Animated.timing(this.rotateCard, { toValue: 3, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(this.animationCallback);
         this.setState({ isShowAllCards: false, cardAppeared: false })
@@ -132,8 +132,8 @@ class MainScreen extends Component {
             outputRange: ['0deg', '90deg', '0deg'],
         });
         const rotateCard = this.rotateCard.interpolate({
-            inputRange: [0, 1, 2, 3, 4],
-            outputRange: ['-90deg', '0deg', '-90deg', '0deg', '-90deg'],
+            inputRange: [0, 1, 2, 3, 4, 5],
+            outputRange: ['-90deg', '0deg', '-90deg', '180deg', '0deg', '-90deg'],
         });
         const pullDrawerIndicator = this.pullDrawer.interpolate({
             inputRange: [0, 1, 2, 3, 4],
