@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         //backgroundColor: '#1F313D',
     },
     entryText: {
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto-Regular',
         fontStyle: 'normal',
         marginStart: 10,
         fontSize: 20,

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { TouchableOpacity, Text, View, Switch, Platform } from 'react-native';
+import { styles } from './style';
 
 export default class MenuItemComponent extends PureComponent {
     constructor(props) {
@@ -33,8 +34,8 @@ export default class MenuItemComponent extends PureComponent {
         const { switchButtonValue } = this.state
         return (
             <TouchableOpacity onPress={this.onPress}>
-                <View style={{ margin: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'stretch' }}>
-                    <Text style={{ margin: 5, marginLeft: '20%', color: '#fff', fontSize: 18, fontFamily: 'Roboto', fontStyle: 'normal', }}>{text}</Text>
+                <View style={styles.container}>
+                    <Text style={styles.entry}>{text}</Text>
                     <Switch
                         style={{ marginRight: '4%' }}
                         onValueChange={this.changeButtonState}

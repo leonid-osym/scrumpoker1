@@ -2,12 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     textStyle: {
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto-Regular',
         fontStyle: 'normal',
         fontSize: 40,
         color: 'white',
-        textShadowColor: 'black',
-        textShadowRadius: 43
+        //textShadowColor: 'black',
+        //textShadowRadius: 43
     },
     cardView: {
         width: '22%',

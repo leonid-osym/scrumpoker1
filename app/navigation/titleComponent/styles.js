@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     titleText: {
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto-Regular',
         fontStyle: 'normal',
         marginStart: 5,
         fontSize: 16,
