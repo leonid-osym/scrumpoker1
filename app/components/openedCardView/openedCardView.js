@@ -4,54 +4,75 @@ import { styles } from './style';
 import Coffee from '../../img/svg/Coffee';
 import Doubts from '../../img/svg/Doubts';
 import Infinity from '../../img/svg/Infinity';
+import LogoWizards2 from '../../img/svg/LogoWizards2';
 
 export default class OpenedCardView extends Component {
     constructor(props) {
         super(props);
-        this.image = null;
-    }
-
-    componentDidMount(){
-        this.processIfGetColor();
-        this.setImage();
+        this.image = this.props.revealMode ? <LogoWizards2 width={250} height={250} /> : null;
+        this.cardItem = '';
+        this.cardShown = this.props.revealMode;
+        this.clicks = 0;
     }
 
     onClick = () => {
-        const { onMainCardClick, item } = this.props;
+        const { onMainCardClick, item, revealMode } = this.props;
+        this.cardShown = false;
         onMainCardClick(item);
-    }
-
-    processIfGetColor = () => {
-        const { item } = this.props;
-        if (item[0] === '#') {
-            this.cardItem = '';
-            this.style = { ...styles.cardView, backgroundColor: item };
-        } else {
-            this.cardItem = item;
-            this.style = { ...styles.cardView };
+        this.cardShown = false;
+        if (revealMode) {
+            //this.image = <LogoWizards2 width={250} height={250} />;
+            this.clicks += 1;
+            if (this.clicks == 2) {
+                this.cardShown = this.props.revealMode;
+                //this.image = null;
+                this.clicks = 0
+            }
         }
     }
 
-    setImage = ()=>{
-        if(this.cardItem === '?'){
-            this.image = <Doubts width={250} height={250}/>
-        } else if(this.cardItem === '∞'){
-            this.image = <Infinity width={230} height={230}/>
-        } else if(this.cardItem === '☕️'){
-            this.image = <Coffee width={250} height={250}/>
-        } else {
+    processIfGetColor = () => {
+        const { item, disabled } = this.props;
+        this.cardItem = '';
+        //if(!disabled){
+            if (item[0] === '#') {
+                this.cardItem = '';
+                this.style = { ...styles.cardView, backgroundColor: item };
+            } else {
+                this.cardItem = item;
+                this.style = { ...styles.cardView };
+            }
+        //}
+    }
+
+    setImage = () => {
+        const { revealMode, disabled } = this.props;
+        if(!revealMode){
             this.image = null;
+        }
+        if (revealMode && this.cardShown && !disabled) {
+            this.image = <LogoWizards2 width={250} height={250} />
+        } else if (this.cardShown === false) {
+            if (this.cardItem === '?') {
+                this.image = <Doubts width={250} height={250} />
+            } else if (this.cardItem === '∞') {
+                this.image = <Infinity width={230} height={230} />
+            } else if (this.cardItem === '☕️') {
+                this.image = <Coffee width={250} height={250} />
+            } else {
+                this.image = null;
+            }
         }
     }
 
     render() {
         this.processIfGetColor();
         this.setImage();
-        const { disabled } = this.props;
+        const { disabled, revealMode } = this.props;
         return (
             <TouchableOpacity onPress={this.onClick} style={this.style} disabled={disabled} activeOpacity={1}>
-                {/* <Text style={styles.textStyle}>{this.cardItem}</Text> */}
-                {this.image ? this.image : <Text style={styles.textStyle}>{this.cardItem}</Text>}
+                {this.image ? this.image : <Text style={styles.textStyle }>{this.cardItem}</Text>}
+                {/* {this.image ? this.image : <Text style={!revealMode ? { ...styles.textStyle } : { ...styles.textStyle, transform: [{ rotateY: '180deg' }] }}>{this.cardItem}</Text>} */}
             </TouchableOpacity>
         )
     }

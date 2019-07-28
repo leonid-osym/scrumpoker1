@@ -9,6 +9,15 @@ export const styles = StyleSheet.create({
         //textShadowColor: 'black',
         //textShadowRadius: 65
     },
+    textStyle: {
+        fontFamily: 'Roboto-Regular',
+        fontStyle: 'normal',
+        fontSize: 120,
+        color: 'white',
+        //transform: [{ rotate: '90deg' }]
+        //textShadowColor: 'black',
+        //textShadowRadius: 65
+    },
     cardView: {
         justifyContent: 'center',
         alignItems: 'center',

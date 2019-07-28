@@ -18,8 +18,9 @@ class MainScreen extends Component {
             item: '',
             mainCardShown: false,
             changeCardBackground: false,
-            isHideCard: false,
-            cardIsBusy: false
+            //isHideCard: false,
+            cardIsBusy: false,
+            cardAppeared: false
         }
         this.cards = [];
         this.rotateGame = new Animated.Value(0);
@@ -30,11 +31,16 @@ class MainScreen extends Component {
 
     onGameCardClick = (item) => {
         const { cardRevealMode } = this.props;
-        const { isShowAllCards, isBusy } = this.state;
-        if (!isBusy) {
-            this.setState({ item: item, isBusy: true });
+        const { isShowAllCards, cardIsBusy, cardAppeared } = this.state;
+        if (!cardIsBusy) {
+            this.setState({ item: item, cardIsBusy: true });
             if (cardRevealMode) {
-                isShowAllCards ? this.animationOpenCardModeGide() : this.animationCloseCardModeGide();
+                if (cardAppeared === true) {
+                    this.animationOpenCardAppeared();
+                    console.log('anim works');
+                } else {
+                    isShowAllCards ? this.animationOpenCardModeReveal() : this.animationCloseCardModeReveal();
+                }
             } else {
                 isShowAllCards ? this.animationOpenCard() : this.animationCloseCard();
             }
@@ -59,32 +65,55 @@ class MainScreen extends Component {
         this.setState({ isShowAllCards: true })
     }
 
-    animationOpenCardModeGide = () => {
+    // animationOpenCardModeReveal = () => {
+    //     this.rotateGame.setValue(0);
+    //     this.rotateCard.setValue(0);
+    //     Animated.timing(this.rotateGame, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(this.animationCallback);
+    //     this.setState({ isShowAllCards: false, isHideCard: true })
+    // }
+
+
+    animationOpenCardModeReveal = () => {
         this.rotateGame.setValue(0);
         this.rotateCard.setValue(0);
-        Animated.timing(this.rotateGame, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(this.animationCallback);
-        this.setState({ isShowAllCards: false, isHideCard: true })
+        Animated.sequence([
+            Animated.timing(this.rotateGame, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }),
+            Animated.timing(this.rotateCard, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true })
+        ]).start(this.animationCallback);
+        this.setState({ isShowAllCards: false, cardAppeared: true })
     }
 
-    animationCloseCardModeGide = () => {
+    animationCloseCardModeReveal = () => {
+        const { cardAppeared } = this.state;
+        if (cardAppeared === false) {
+            Animated.sequence([
+                Animated.timing(this.rotateCard, { toValue: 4, duration: 500, easing: Easing.linear, useNativeDriver: true }),
+                Animated.timing(this.rotateGame, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true })
+            ]).start(this.animationCallback);
+            this.setState({ isShowAllCards: true })
+        }
+    }
+
+    animationOpenCardAppeared = () => {
         Animated.sequence([
             Animated.timing(this.rotateCard, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true }),
-            Animated.timing(this.rotateGame, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true })
+            Animated.timing(this.rotateCard, { toValue: 3, duration: 500, easing: Easing.linear, useNativeDriver: true })
         ]).start(this.animationCallback);
-        this.setState({ isShowAllCards: true })
+        //Animated.timing(this.rotateCard, { toValue: 3, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(this.animationCallback);
+        this.setState({ isShowAllCards: false, cardAppeared: false })
     }
 
     showCard = () => {
-        const { isBusy } = this.state;
-        if (!isBusy) {
-            this.setState({ isBusy: true });
+        const { cardIsBusy } = this.state;
+        if (!cardIsBusy) {
+            this.setState({ cardIsBusy: true });
             this.setState({ isHideCard: false });
-            Animated.timing(this.rotateCard, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(this.animationCallback)
+            Animated.timing(this.rotateCard, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(this.animationCallback);
         }
     }
 
     animationCallback = () => {
-        this.setState({ isBusy: false });
+        this.setState({ cardIsBusy: false });
     }
 
     animateDrawerIndicator = () => {
@@ -97,14 +126,14 @@ class MainScreen extends Component {
         let positionY = (Dimensions.get('window').height) / 2 - 34;
         let positionX = -50;
         const { item, isHideCard, cardIsBusy } = this.state;
-        const { drawerIndicator } = this.props;
+        const { drawerIndicator, cardRevealMode } = this.props;
         const rotateGame = this.rotateGame.interpolate({
             inputRange: [0, 1, 2],
             outputRange: ['0deg', '90deg', '0deg'],
         });
         const rotateCard = this.rotateCard.interpolate({
-            inputRange: [0, 1, 2],
-            outputRange: ['-90deg', '0deg', '-90deg'],
+            inputRange: [0, 1, 2, 3, 4],
+            outputRange: ['-90deg', '0deg', '-90deg', '0deg', '-90deg'],
         });
         const pullDrawerIndicator = this.pullDrawer.interpolate({
             inputRange: [0, 1, 2, 3, 4],
@@ -116,10 +145,8 @@ class MainScreen extends Component {
                     <GameView onGameCardClick={this.onGameCardClick} disabled={cardIsBusy} />
                 </Animated.View>
                 <Animated.View style={{ ...styles.cardViewAnimated, transform: [{ rotateY: rotateCard }] }}>
-                    <OpenedCardView item={item} onMainCardClick={this.onGameCardClick} disabled={cardIsBusy} />
+                    <OpenedCardView item={item} onMainCardClick={this.onGameCardClick} disabled={cardIsBusy} revealMode={cardRevealMode}/>
                 </Animated.View>
-                {isHideCard ? <TouchableOpacity style={styles.darkCard} onPress={this.showCard} disabled={cardIsBusy} /> : null}
-
                 {
                     drawerIndicator ?
                         <TouchableOpacity onPress={this.animateDrawerIndicator} style={{ ...styles.circleButton, top: positionY, left: positionX }} >
