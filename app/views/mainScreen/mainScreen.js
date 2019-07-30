@@ -21,15 +21,12 @@ class MainScreen extends Component {
             allCardsShown: true,
             image: null,
             cardItem: '',
-            mainCardShown: false,
-            changeCardBackground: false,
             cardIsBusy: false,
             cardAppeared: false,
             cardRotated: true
         }
         this.item = '';
         this.style = null;
-        this.cards = [];
         this.rotateGame = new Animated.Value(0);
         this.rotateCard = new Animated.Value(0);
         this.pullDrawer = new Animated.Value(0);
@@ -41,9 +38,6 @@ class MainScreen extends Component {
         const { allCardsShown, cardIsBusy, cardAppeared } = this.state;
         this.item=item;
         this.setState({ cardIsBusy: true });
-        // console.log('item', item)
-        // console.log('item-2',this.state.item)
-        // console.log('item-3',this.item)
         this.processInput(item);
         if (!cardIsBusy) {
             if (cardRevealMode) {
@@ -156,7 +150,7 @@ class MainScreen extends Component {
     render() {
         let positionY = (Dimensions.get('window').height) / 2 - 34;
         let positionX = -50;
-        const { item, cardIsBusy, cardItem, image } = this.state;
+        const { cardIsBusy, cardItem, image } = this.state;
         const { drawerIndicator } = this.props;
         const rotateGame = this.rotateGame.interpolate({
             inputRange: [0, 1, 2],

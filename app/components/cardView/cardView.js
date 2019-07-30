@@ -4,7 +4,6 @@ import { styles } from './style';
 import Coffee from '../../img/svg/Coffee';
 import Doubts from '../../img/svg/Doubts';
 import Infinity from '../../img/svg/Infinity';
-import LogoWizards2 from '../../img/svg/LogoWizards2';
 
 export default class CardView extends PureComponent {
     constructor(props) {
@@ -12,8 +11,6 @@ export default class CardView extends PureComponent {
         this.style = null;
         this.cardItem = null;
         this.image = false;
-        // this.processIfGetColor();
-        // this.setImage();
     }
 
     onClick = () => {
@@ -21,32 +18,30 @@ export default class CardView extends PureComponent {
         onClick(item);
     }
 
-    processIfGetColor = () => {
+    processInput = () => {
         const { item } = this.props;
+        this.style = { ...styles.cardView };
         if (item[0] === '#') {
             this.cardItem = '';
             this.style = { ...styles.cardView, backgroundColor: item };
-        } else {
-            this.cardItem = item;
-            this.style = { ...styles.cardView };
-        }
-    }
-
-    setImage = ()=>{
-        if(this.cardItem === '?'){
+        } 
+        else if(item === '?'){
             this.image = <Doubts width={55} height={55}/>
         }
-        if(this.cardItem === '∞'){
+        else if(item === '∞'){
             this.image = <Infinity width={55} height={55}/>
         }
-        if(this.cardItem === '☕️'){
+        else if(item === '☕️'){
             this.image = <Coffee width={55} height={55}/>
+        }
+        else {
+            this.cardItem = item;
+            this.image = false;
         }
     }
 
     render() {
-        this.processIfGetColor();
-        this.setImage();
+        this.processInput();
         const { disabled } = this.props;
         return (
             <TouchableOpacity onPress={this.onClick} style={this.style} disabled={disabled}>
