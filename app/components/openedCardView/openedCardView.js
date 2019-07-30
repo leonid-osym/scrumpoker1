@@ -1,74 +1,22 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { styles } from './style';
-import Coffee from '../../img/svg/Coffee';
-import Doubts from '../../img/svg/Doubts';
-import Infinity from '../../img/svg/Infinity';
-import LogoWizards2 from '../../img/svg/LogoWizards2';
 
-export default class OpenedCardView extends Component {
+export default class OpenedCardView extends PureComponent {
     constructor(props) {
         super(props);
-        this.image = this.props.revealMode ? <LogoWizards2 width={250} height={250} /> : null;
-        this.cardItem = '';
-        this.cardShown = this.props.revealMode;
-        this.clicks = 0;
     }
 
     onClick = () => {
-        const { onMainCardClick, item, revealMode, disabled } = this.props;
-        this.cardShown = false;
+        const { onMainCardClick, item } = this.props;
         onMainCardClick(item);
-        if (revealMode) {
-            this.clicks += 1;
-            if (this.clicks == 2) {
-                this.cardShown = this.props.revealMode;
-                this.clicks = 0
-            }
-        }
-    }
-
-    processIfGetColor = () => {
-        const { item, disabled } = this.props;
-        this.cardItem = '';
-        if (item[0] === '#') {
-            if (this.clicks != 0) {
-                this.cardItem = '';
-                this.style = { ...styles.cardView, backgroundColor: item };
-            } 
-        } else {
-            this.cardItem = item;
-            this.style = { ...styles.cardView };
-        }
-    }
-
-    setImage = () => {
-        const { revealMode, disabled } = this.props;
-        if (!revealMode) {
-            this.image = null;
-        }
-        if (revealMode && this.cardShown && !disabled) {
-            this.image = <LogoWizards2 width={250} height={250} />
-        } else if (this.cardShown === false) {
-            if (this.cardItem === '?') {
-                this.image = <Doubts width={250} height={250} />
-            } else if (this.cardItem === '∞') {
-                this.image = <Infinity width={230} height={230} />
-            } else if (this.cardItem === '☕️') {
-                this.image = <Coffee width={250} height={250} />
-            } else {
-                this.image = null;
-            }
-        }
     }
 
     render() {
-        this.processIfGetColor();
-        this.setImage();
-        const { disabled, revealMode } = this.props;
+        const { disabled, image, cardItem, style } = this.props;
         return (
-            <TouchableOpacity onPress={this.onClick} style={this.style} disabled={disabled} activeOpacity={1}>
-                {this.image ? this.image : <Text style={styles.textStyle}>{this.cardItem}</Text>}
+            <TouchableOpacity onPress={this.onClick} style={style} disabled={disabled} activeOpacity={1}>
+                {image ? image : <Text style={styles.textStyle}>{cardItem}</Text>}
             </TouchableOpacity>
         )
     }

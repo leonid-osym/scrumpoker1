@@ -20,6 +20,16 @@ export const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
     },
+    cardView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        //borderColor: 'white',
+        //borderWidth: 6,
+        backgroundColor: '#00799f',
+        borderRadius: 40,
+        width:300,
+        height:'80%'
+    },
     darkCard: { 
         position: 'absolute', 
         width: '100%', 

@@ -5,9 +5,6 @@ import GameView from '../../components/gameView/gameView';
 import OpenedCardView from '../../components/openedCardView/openedCardView';
 import { styles } from './style';
 import LogoWizards2 from '../../img/svg/LogoWizards2';
-import Doubts from '../../img/svg/Doubts';
-import Infinity from '../../img/svg/Infinity';
-import Coffee from '../../img/svg/Coffee';
 
 class MainScreen extends Component {
 
@@ -18,17 +15,14 @@ class MainScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            allCardsShown: true,
-            image: null,
-            cardItem: '',
+            isShowAllCards: true,
+            item: '',
             mainCardShown: false,
             changeCardBackground: false,
             cardIsBusy: false,
             cardAppeared: false,
-            cardRotated: true
+            cardRotated: false
         }
-        this.item = '';
-        this.style = null;
         this.cards = [];
         this.rotateGame = new Animated.Value(0);
         this.rotateCard = new Animated.Value(0);
@@ -38,89 +32,97 @@ class MainScreen extends Component {
 
     onGameCardClick = (item) => {
         const { cardRevealMode } = this.props;
-        const { allCardsShown, cardIsBusy, cardAppeared } = this.state;
-        this.item=item;
-        this.setState({ cardIsBusy: true });
-        // console.log('item', item)
-        // console.log('item-2',this.state.item)
-        // console.log('item-3',this.item)
-        this.processInput(item);
+        const { isShowAllCards, cardIsBusy, cardAppeared } = this.state;
         if (!cardIsBusy) {
+            this.setState({ item: item, cardIsBusy: true });
+            //this.setState({ cardClosed: false });
             if (cardRevealMode) {
                 if (cardAppeared) {
                     this.animationOpenCardAppeared();
                 } else {
-                    allCardsShown ? this.animationOpenCardModeReveal() : this.animationCloseCardModeReveal();
+                    isShowAllCards ? this.animationOpenCardModeReveal() : this.animationCloseCardModeReveal();
                 }
             } else {
-                allCardsShown ? this.animationOpenCard() : this.animationCloseCard();
+                isShowAllCards ? this.animationOpenCard() : this.animationCloseCard();
             }
         }
-    }
-
-    animatedSequence = (firstValueToDrive, secondValueToDrive, firstToValue, secondToValue, firstDuration, secondDuration, animationCallback) => {
-        Animated.sequence([
-            Animated.timing(firstValueToDrive, { toValue: firstToValue, duration: firstDuration, easing: Easing.linear, useNativeDriver: true }),
-            Animated.timing(secondValueToDrive, { toValue: secondToValue, duration: secondDuration, easing: Easing.linear, useNativeDriver: true })
-        ]).start(animationCallback);
     }
 
     animationOpenCard = () => {
         this.rotateGame.setValue(0);
         this.rotateCard.setValue(0);
-        this.animatedSequence(this.rotateGame, this.rotateCard, 1, 1, 500, 500, this.simpleAnimationCallback);
-        this.setState({ allCardsShown: false })
+        Animated.sequence([
+            Animated.timing(this.rotateGame, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }),
+            Animated.timing(this.rotateCard, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true })
+        ]).start(this.animationCallback);
+        this.setState({ isShowAllCards: false })
     }
 
     animationCloseCard = () => {
-        this.animatedSequence(this.rotateCard, this.rotateGame, 2, 2, 500, 500, this.simpleAnimationCallback);
-        this.setState({ allCardsShown: true })
+        Animated.sequence([
+            Animated.timing(this.rotateCard, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true }),
+            Animated.timing(this.rotateGame, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true })
+        ]).start(this.animationCallback);
+        this.setState({ isShowAllCards: true })
     }
 
     animationOpenCardModeReveal = () => {
         this.rotateGame.setValue(0);
         this.rotateCard.setValue(0);
-        this.setState({ cardRotated: true, })
-        this.animatedSequence(this.rotateGame, this.rotateCard, 1, 1, 500, 500, this.animationCallback);
+        this.setState({ cardRotated: false, });
+        Animated.sequence([
+            Animated.timing(this.rotateGame, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }),
+            Animated.timing(this.rotateCard, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true })
+        ]).start(this.animationCallback);
+        this.setState({ isShowAllCards: false, cardAppeared: true })
     }
 
     animationCloseCardModeReveal = () => {
         const { cardAppeared } = this.state;
-        if (!cardAppeared) {
+        if (cardAppeared === false) {
             Animated.sequence([
                 Animated.timing(this.rotateCard, { toValue: 5, duration: 0, easing: Easing.linear, useNativeDriver: true }),
                 Animated.timing(this.rotateCard, { toValue: 6, duration: 500, easing: Easing.linear, useNativeDriver: true }),
                 Animated.timing(this.rotateGame, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true })
             ]).start(this.animationCallbackCardClosed);
+            // this.setState({ isShowAllCards: true })
         }
     }
 
     animationOpenCardAppeared = () => {
+        this.setState({ animationIsEnded: false, })
         Animated.timing(this.rotateCard, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(
             () => {
-                this.animationCallbackAppeared()
-                this.animatedSequence(this.rotateCard, this.rotateCard, 3, 4, 0, 500, null);
+                this.animationCallbackAppeared();
+                    Animated.sequence([
+                        Animated.timing(this.rotateCard, { toValue: 3, duration: 0, easing: Easing.linear, useNativeDriver: true }),
+                        Animated.timing(this.rotateCard, { toValue: 4, duration: 500, easing: Easing.linear, useNativeDriver: true })
+                    ]).start();
             }
         );
+        this.setState({ isShowAllCards: false, })
     }
 
-    simpleAnimationCallback = () => {
-        this.setState({ cardIsBusy: false, cardAppeared: false });
+    showCard = () => {
+        const { cardIsBusy } = this.state;
+        if (!cardIsBusy) {
+            this.setState({ cardIsBusy: true });
+            Animated.timing(this.rotateCard, { toValue: 1, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(this.animationCallback);
+        }
     }
 
     animationCallback = () => {
-        this.setState({ cardIsBusy: false, allCardsShown: false, cardAppeared: true });
+        this.setState({ cardIsBusy: false, isShowAllCards: false, cardAppeared: true });
     }
 
     animationCallbackAppeared = () => {
-        this.setState({ cardRotated: false, cardIsBusy: false, allCardsShown: false, cardAppeared: false, animationIsEnded: false, }, () => {
-            this.processInput();
-        });
+        console.log('animationCallbackAppeared');
+        this.setState({ cardRotated: true, cardIsBusy: false, isShowAllCards: false, cardAppeared: false });
     }
 
     animationCallbackCardClosed = () => {
-        this.setState({ cardIsBusy: false, cardAppeared: false, allCardsShown: true, cardRotated: true });
-        this.processInput();
+        console.log('animationCallbackCardClosed')
+        this.setState({ cardIsBusy: false, cardAppeared: false, isShowAllCards: true });
     }
 
     animateDrawerIndicator = () => {
@@ -129,35 +131,11 @@ class MainScreen extends Component {
         Animated.timing(this.pullDrawer, { toValue: 4, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(() => { this.props.navigation.openDrawer() });
     }
 
-    processInput = () => {
-        const { cardRevealMode } = this.props;
-        const { cardRotated } = this.state;
-        this.style = { ...styles.cardView };
-        let item = this.item;
-        if (cardRevealMode && cardRotated) {
-            this.setState({ cardItem: '', image: <LogoWizards2 width={250} height={250} /> });
-        } else {
-            if (item[0] === '#') {
-                this.setState({ cardItem: '', image: null });
-                this.style = { ...styles.cardView, backgroundColor: item };
-            } else if (item === '?') {
-                this.setState({ image: <Doubts width={250} height={250} /> });
-            } else if (item === '∞') {
-                this.setState({ image: <Infinity width={230} height={230} /> });
-            } else if (item === '☕️') {
-                this.setState({ image: <Coffee width={250} height={250} /> });
-            } else {
-                console.log('processInput - item', item);
-                this.setState({ image: null, cardItem: item });
-            }
-        }
-    }
-
     render() {
         let positionY = (Dimensions.get('window').height) / 2 - 34;
         let positionX = -50;
-        const { item, cardIsBusy, cardItem, image } = this.state;
-        const { drawerIndicator } = this.props;
+        const { item, cardIsBusy, cardRotated } = this.state;
+        const { drawerIndicator, cardRevealMode } = this.props;
         const rotateGame = this.rotateGame.interpolate({
             inputRange: [0, 1, 2],
             outputRange: ['0deg', '90deg', '0deg'],
@@ -176,7 +154,7 @@ class MainScreen extends Component {
                     <GameView onGameCardClick={this.onGameCardClick} disabled={cardIsBusy} />
                 </Animated.View>
                 <Animated.View style={{ ...styles.cardViewAnimated, transform: [{ rotateY: rotateCard }] }}>
-                    <OpenedCardView item={this.item} onMainCardClick={this.onGameCardClick} disabled={cardIsBusy} cardItem={cardItem} image={image} style={this.style}/>
+                    <OpenedCardView item={item} onMainCardClick={this.onGameCardClick} disabled={cardIsBusy} revealMode={cardRevealMode} cardRotated={cardRotated}/>
                 </Animated.View>
                 {
                     drawerIndicator ?
