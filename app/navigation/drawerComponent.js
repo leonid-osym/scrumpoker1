@@ -63,8 +63,8 @@ class DrawerComponent extends Component {
                 <View style={styles.divider} />
                 <DrawerEntry imgSource={images['settings']} text='Settings' onPress={() => this.props.navigation.navigate('Settings')}/>
                 <View style={styles.divider} />
-                <DrawerEntry imgSource={images['share']} text='Tell the world!' onPress={this.shareWithOthers}/>
-                <View style={styles.divider} />
+                {/* <DrawerEntry imgSource={images['share']} text='Tell the world!' onPress={this.shareWithOthers}/>
+                <View style={styles.divider} /> */}
                 <DrawerEntry imgSource={images['info']} text='About' onPress={() => this.props.navigation.navigate('About')}/>
                 <View style={styles.divider} />
             </View >)

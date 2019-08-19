@@ -9,9 +9,6 @@ class GameView extends Component {
     constructor(props) {
         super(props);
         this.cards = [];
-        this.state={
-            cards: []
-        }
         this.fillCards();
     }
 
