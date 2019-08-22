@@ -62,12 +62,12 @@ class MainScreen extends Component {
     animationOpenCard = () => {
         this.rotateGame.setValue(0);
         this.rotateCard.setValue(0);
-        this.animatedSequence(this.rotateGame, this.rotateCard, 1, 1, 500, 500, this.simpleAnimationCallback);
+        this.animatedSequence(this.rotateGame, this.rotateCard, 1, 1, 300, 300, this.simpleAnimationCallback);
         this.setState({ allCardsShown: false })
     }
 
     animationCloseCard = () => {
-        this.animatedSequence(this.rotateCard, this.rotateGame, 2, 2, 500, 500, this.simpleAnimationCallback);
+        this.animatedSequence(this.rotateCard, this.rotateGame, 2, 2, 300, 300, this.simpleAnimationCallback);
         this.setState({ allCardsShown: true })
     }
 
@@ -75,7 +75,7 @@ class MainScreen extends Component {
         this.rotateGame.setValue(0);
         this.rotateCard.setValue(0);
         this.setState({ cardRotated: true, })
-        this.animatedSequence(this.rotateGame, this.rotateCard, 1, 1, 500, 500, this.animationCallback);
+        this.animatedSequence(this.rotateGame, this.rotateCard, 1, 1, 300, 300, this.animationCallback);
     }
 
     animationCloseCardModeReveal = () => {
@@ -83,17 +83,17 @@ class MainScreen extends Component {
         if (!cardAppeared) {
             Animated.sequence([
                 Animated.timing(this.rotateCard, { toValue: 5, duration: 0, easing: Easing.linear, useNativeDriver: true }),
-                Animated.timing(this.rotateCard, { toValue: 6, duration: 500, easing: Easing.linear, useNativeDriver: true }),
-                Animated.timing(this.rotateGame, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true })
+                Animated.timing(this.rotateCard, { toValue: 6, duration: 300, easing: Easing.linear, useNativeDriver: true }),
+                Animated.timing(this.rotateGame, { toValue: 2, duration: 300, easing: Easing.linear, useNativeDriver: true })
             ]).start(this.animationCallbackCardClosed);
         }
     }
 
     animationOpenCardAppeared = () => {
-        Animated.timing(this.rotateCard, { toValue: 2, duration: 500, easing: Easing.linear, useNativeDriver: true }).start(
+        Animated.timing(this.rotateCard, { toValue: 2, duration: 300, easing: Easing.linear, useNativeDriver: true }).start(
             () => {
                 this.animationCallbackAppeared()
-                this.animatedSequence(this.rotateCard, this.rotateCard, 3, 4, 0, 500, null);
+                this.animatedSequence(this.rotateCard, this.rotateCard, 3, 4, 0, 300, null);
             }
         );
     }

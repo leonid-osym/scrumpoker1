@@ -9,10 +9,10 @@ export default class DrawerEntry extends PureComponent {
     }
 
     render() {
-        const { imgSource, text, onPress } = this.props;
+        const { imgSource, text, onPress, isActive } = this.props;
         return (
             
-                <TouchableOpacity onPress={onPress} style={styles.touchOpacity}>
+                <TouchableOpacity onPress={onPress} style={isActive ? styles.touchOpacityChosen : styles.touchOpacity}>
                     <View style={styles.entryView}>
                     <Image style={styles.icon} source={imgSource} />
                     <Text style={styles.entryText}>{text}</Text >

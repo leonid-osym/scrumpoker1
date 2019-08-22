@@ -18,6 +18,14 @@ export const styles = StyleSheet.create({
         marginStart: 10
     },
     touchOpacity: {
+        //backgroundColor: '#1F313D',
+        flexDirection: 'row', 
+        justifyContent: 'flex-start', 
+        alignItems: 'center',
+        height: '7%',
+    },
+    touchOpacityChosen: {
+        backgroundColor: '#1F313D',
         flexDirection: 'row', 
         justifyContent: 'flex-start', 
         alignItems: 'center',
