@@ -1,4 +1,4 @@
-package com.scrumpoker1;
+package com.scrumpoker;
 
 import android.app.Application;
 

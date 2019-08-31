@@ -1,4 +1,4 @@
-package com.scrumpoker1;
+package com.scrumpoker;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -13,7 +13,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "scrumpoker1";
+        return "scrumpoker";
     }
 
     @Override
